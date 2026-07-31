@@ -1,0 +1,61 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tt_mrp_bom_fixed_quantity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: tt_mrp_bom_fixed_quantity
+#: model:ir.model,name:tt_mrp_bom_fixed_quantity.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Ligne de nomenclature"
+
+#. module: tt_mrp_bom_fixed_quantity
+#: model:ir.model.fields.selection,name:tt_mrp_bom_fixed_quantity.selection__mrp_bom_line__tt_qty_type__fixed
+msgid "Fixed Quantity"
+msgstr "Quantité fixe"
+
+#. module: tt_mrp_bom_fixed_quantity
+#: model:ir.model,name:tt_mrp_bom_fixed_quantity.model_mrp_production
+msgid "Production Order"
+msgstr "Ordre de fabrication"
+
+#. module: tt_mrp_bom_fixed_quantity
+#: model:ir.model.fields.selection,name:tt_mrp_bom_fixed_quantity.selection__mrp_bom_line__tt_qty_type__proportional
+msgid "Proportional"
+msgstr "Proportionnel"
+
+#. module: tt_mrp_bom_fixed_quantity
+#: model:ir.model.fields,field_description:tt_mrp_bom_fixed_quantity.field_mrp_bom_line__tt_qty_type
+msgid "Quantity Mode"
+msgstr "Mode de calcul"
+
+#. module: tt_mrp_bom_fixed_quantity
+#: model:ir.model,name:tt_mrp_bom_fixed_quantity.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: tt_mrp_bom_fixed_quantity
+#: model:ir.model.fields,help:tt_mrp_bom_fixed_quantity.field_mrp_bom_line__tt_qty_type
+msgid ""
+"Proportional: the quantity follows the quantity to produce, as Odoo does by "
+"default.\n"
+"Fixed Quantity: the quantity written on this line is consumed as is, whatever "
+"the quantity to produce. Use it for a component consumed once per unit "
+"produced, such as a core, a label or a wrapping film."
+msgstr ""
+"Proportionnel : la quantité suit la quantité à fabriquer, comme le fait Odoo "
+"par défaut.\n"
+"Quantité fixe : la quantité saisie sur cette ligne est consommée telle "
+"quelle, quelle que soit la quantité à fabriquer. À utiliser pour un composant "
+"consommé une seule fois par unité produite, tel qu'un mandrin, une étiquette "
+"ou un film de protection."
