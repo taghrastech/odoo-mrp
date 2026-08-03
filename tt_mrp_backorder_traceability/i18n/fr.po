@@ -1,0 +1,266 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tt_mrp_backorder_traceability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.module.module,shortdesc:tt_mrp_backorder_traceability.module_meta_information
+msgid "Manufacturing Splits and Backorders Traceability"
+msgstr "Traçabilité des fractionnements et reliquats de fabrication"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.module.module,summary:tt_mrp_backorder_traceability.module_meta_information
+msgid "Link, filter and group manufacturing orders with their splits and backorders"
+msgstr ""
+"Relier, filtrer et regrouper les ordres de fabrication avec leurs "
+"fractionnements et reliquats"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_root_id
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Original MO"
+msgstr "OF d'origine"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_root_id
+msgid ""
+"Manufacturing order this one originates from, at the root of the whole chain "
+"of splits and backorders. It is set on the original order itself, so that "
+"grouping by this field keeps the original order together with everything "
+"derived from it. Empty when nothing was ever derived from the order."
+msgstr ""
+"Ordre de fabrication à l'origine de celui-ci, à la racine de toute la chaîne "
+"de fractionnements et de reliquats. Il est également renseigné sur l'OF "
+"d'origine lui-même, afin qu'un regroupement sur ce champ réunisse l'OF "
+"d'origine et tout ce qui en découle. Vide tant que rien n'a été créé à partir "
+"de cet OF."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_parent_id
+msgid "Derived From"
+msgstr "Issu de"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_parent_id
+msgid ""
+"Manufacturing order this one was directly derived from, by a split or as a "
+"backorder. Empty on the original order."
+msgstr ""
+"Ordre de fabrication dont celui-ci provient directement, par fractionnement "
+"ou en tant que reliquat. Vide sur l'OF d'origine."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_child_ids
+msgid "Derived MOs"
+msgstr "OF issus de celui-ci"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_origin
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Origin"
+msgstr "Provenance"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_origin
+msgid ""
+"How this manufacturing order came to be:\n"
+"- Original: the order the chain started from.\n"
+"- Split: created by deliberately splitting a planned quantity.\n"
+"- Backorder: created automatically for the quantity left to produce when an order was closed short.\n"
+"- Undetermined: derived from another order before this module was installed, when the distinction can no longer be recovered."
+msgstr ""
+"Comment cet ordre de fabrication a été créé :\n"
+"- Origine : l'OF par lequel la chaîne a commencé.\n"
+"- Fractionnement : créé en divisant volontairement une quantité planifiée.\n"
+"- Reliquat : créé automatiquement pour la quantité restant à produire lorsqu'un OF a été clôturé avant d'être terminé.\n"
+"- Indéterminé : issu d'un autre OF avant l'installation du module, la distinction n'étant plus récupérable."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields.selection,name:tt_mrp_backorder_traceability.selection__mrp_production__tt_split_origin__original
+msgid "Original"
+msgstr "Origine"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields.selection,name:tt_mrp_backorder_traceability.selection__mrp_production__tt_split_origin__split
+msgid "Split"
+msgstr "Fractionnement"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields.selection,name:tt_mrp_backorder_traceability.selection__mrp_production__tt_split_origin__backorder
+msgid "Backorder"
+msgstr "Reliquat"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields.selection,name:tt_mrp_backorder_traceability.selection__mrp_production__tt_split_origin__unknown
+msgid "Undetermined"
+msgstr "Indéterminé"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_ids
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_count
+msgid "Related MOs"
+msgstr "OF liés"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_ids
+msgid "Every manufacturing order of the same chain, the original one included."
+msgstr "Tous les ordres de fabrication de la même chaîne, l'OF d'origine compris."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_count
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Splits"
+msgstr "Fractionnements"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_count
+msgid "Number of orders of the chain created by a split."
+msgstr "Nombre d'OF de la chaîne créés par fractionnement."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_backorder_count
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Backorders"
+msgstr "Reliquats"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_backorder_count
+msgid "Number of orders of the chain created as a backorder."
+msgstr "Nombre d'OF de la chaîne créés en tant que reliquat."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_qty_total
+msgid "Total To Produce"
+msgstr "Total à produire"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_qty_total
+msgid "Quantity to produce over the whole chain, cancelled orders excluded."
+msgstr "Quantité à produire sur l'ensemble de la chaîne, OF annulés exclus."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_qty_produced
+msgid "Total Produced"
+msgstr "Total produit"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_qty_remaining
+msgid "Total Remaining"
+msgstr "Reste à produire"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_qty_cancelled
+msgid "Total Cancelled"
+msgstr "Total annulé"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_qty_cancelled
+msgid "Quantity carried by the cancelled orders of the chain."
+msgstr "Quantité portée par les OF annulés de la chaîne."
+
+#. module: tt_mrp_backorder_traceability
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.mrp_production_form_view_split
+msgid "Splits & Backorders"
+msgstr "Fractionnements et reliquats"
+
+#. module: tt_mrp_backorder_traceability
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Original MOs"
+msgstr "OF d'origine"
+
+#. module: tt_mrp_backorder_traceability
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Orders a chain of splits or backorders started from."
+msgstr "OF par lesquels une chaîne de fractionnements ou de reliquats a commencé."
+
+#. module: tt_mrp_backorder_traceability
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Orders created by deliberately splitting a planned quantity."
+msgstr "OF créés en divisant volontairement une quantité planifiée."
+
+#. module: tt_mrp_backorder_traceability
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Orders created for the quantity left to produce when an order was closed short."
+msgstr ""
+"OF créés pour la quantité restant à produire lorsqu'un OF a été clôturé avant "
+"d'être terminé."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_progress
+msgid "Progress"
+msgstr "Progression"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_split_family_progress
+msgid "Share of the chain already produced, cancelled orders excluded."
+msgstr "Part de la chaîne déjà produite, OF annulés exclus."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_consumed_lot_ids
+msgid "Consumed Lots"
+msgstr "Lots consommés"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_consumed_lot_ids
+msgid ""
+"Lots and serial numbers this order consumes as components. Empty when none of "
+"the components are tracked."
+msgstr ""
+"Lots et numéros de série que cet OF consomme en tant que composants. Vide "
+"lorsque aucun composant n'est tracé."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_chain_consumed_lot_ids
+msgid "Chain Consumed Lots"
+msgstr "Lots consommés par la chaîne"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,field_description:tt_mrp_backorder_traceability.field_mrp_production__tt_is_self_consuming
+msgid "Consumes Its Own Product"
+msgstr "Consomme son propre produit"
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_is_self_consuming
+msgid ""
+"The order takes the very product it produces as a component, the way a "
+"cutting or portioning operation does. The consumed lots then describe where "
+"the produced material comes from, which is why they are only worth showing in "
+"that case: on a regular order they belong to other products."
+msgstr ""
+"L'OF prend en composant le produit même qu'il fabrique, comme le fait une "
+"opération de découpe ou de portionnage. Les lots consommés décrivent alors "
+"d'où provient la matière produite, ce qui justifie de ne les afficher que dans "
+"ce cas : sur un OF classique, ils appartiennent à d'autres produits."
+
+#. module: tt_mrp_backorder_traceability
+#: model:ir.model.fields,help:tt_mrp_backorder_traceability.field_mrp_production__tt_chain_consumed_lot_ids
+msgid "Every lot and serial number consumed by the whole chain."
+msgstr "Tous les lots et numéros de série consommés par l'ensemble de la chaîne."
+
+#. module: tt_mrp_backorder_traceability
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.mrp_production_form_view_split
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.view_mrp_production_filter_split
+msgid "Source Document"
+msgstr "Document d'origine"
+
+#. module: tt_mrp_backorder_traceability
+#: model_terms:ir.ui.view,arch_db:tt_mrp_backorder_traceability.mrp_production_form_view_split
+msgid "UoM"
+msgstr "UdM"
+
+#. module: tt_mrp_backorder_traceability
+#: code:addons/tt_mrp_backorder_traceability/models/mrp_production.py:0
+#, python-format
+msgid "Splits and backorders of %s"
+msgstr "Fractionnements et reliquats de %s"

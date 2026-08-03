@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_production_tree_view_split" model="ir.ui.view">
+        <field name="name">mrp.production.list.split.traceability</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="tt_split_origin" optional="hide"/>
+                <field name="tt_split_root_id" optional="hide"/>
+                <field name="tt_split_parent_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_filter_split" model="ir.ui.view">
+        <field name="name">mrp.production.select.split.traceability</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="tt_split_root_id"/>
+            </field>
+            <filter name="starred" position="after">
+                <separator/>
+                <filter string="Original MOs" name="tt_split_originals"
+                        domain="[('tt_split_origin', '=', 'original')]"
+                        help="Orders a chain of splits or backorders started from."/>
+                <filter string="Splits" name="tt_splits"
+                        domain="[('tt_split_origin', '=', 'split')]"
+                        help="Orders created by deliberately splitting a planned quantity."/>
+                <filter string="Backorders" name="tt_backorders"
+                        domain="[('tt_split_origin', '=', 'backorder')]"
+                        help="Orders created for the quantity left to produce when an order was closed short."/>
+            </filter>
+            <filter name="procurement_group_id" position="before">
+                <filter string="Original MO" name="tt_split_root"
+                        domain="[]" context="{'group_by': 'tt_split_root_id'}"/>
+                <filter string="Origin" name="tt_split_origin_group"
+                        domain="[]" context="{'group_by': 'tt_split_origin'}"/>
+                <!-- The native search view exposes origin as a search field but not as
+                     a grouping: this is what gathers every chain of a same order. -->
+                <filter string="Source Document" name="tt_origin_group"
+                        domain="[]" context="{'group_by': 'origin'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="mrp_production_form_view_split" model="ir.ui.view">
+        <field name="name">mrp.production.form.split.traceability</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <field name="consumption" position="after">
+                <field name="tt_split_family_count" invisible="1"/>
+            </field>
+
+            <page name="miscellaneous" position="after">
+                <page string="Splits &amp; Backorders" name="tt_split_family"
+                      invisible="tt_split_family_count &lt; 2">
+                    <group>
+                        <group>
+                            <field name="tt_split_origin"/>
+                            <field name="tt_split_root_id"/>
+                            <field name="tt_split_parent_id"
+                                   invisible="tt_split_origin == 'original'"/>
+                            <!-- The source document is copied onto every backorder, so
+                                 it is the same on all rows: shown once here rather than
+                                 as a column repeating itself. -->
+                            <field name="origin" string="Source Document" readonly="1"
+                                   invisible="not origin"/>
+                            <!-- Consumed lots only tell a story when the order eats its
+                                 own product, as a cutting does: the lot is then the
+                                 material the output was taken from. On a regular order
+                                 the components are other products, and listing their
+                                 lots here would be noise. -->
+                            <field name="tt_is_self_consuming" invisible="1"/>
+                            <field name="tt_chain_consumed_lot_ids" widget="many2many_tags"
+                                   invisible="not tt_is_self_consuming or not tt_chain_consumed_lot_ids"/>
+                        </group>
+                        <group>
+                            <field name="tt_split_family_count"/>
+                            <field name="tt_split_count"/>
+                            <field name="tt_backorder_count"/>
+                            <field name="tt_split_family_qty_total"/>
+                            <field name="tt_split_family_qty_produced"/>
+                            <field name="tt_split_family_qty_remaining"/>
+                            <field name="tt_split_family_qty_cancelled"
+                                   invisible="tt_split_family_qty_cancelled == 0"/>
+                            <field name="tt_split_family_progress" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <!-- link/unlink are what drive "Add a line" and the remove cross on a
+                         many2many; create/delete alone would leave them both visible.
+                         Chain membership comes from Original MO, never from this list.
+                         Clicking a row opens the order in the standard dialog: editable,
+                         and with the expand-to-page button the web client puts on x2many
+                         dialogs. No button of our own, which would open an action dialog
+                         and lose that button. -->
+                    <field name="tt_split_family_ids" nolabel="1"
+                           options="{'link': False, 'unlink': False}">
+                        <list create="false" delete="false"
+                              decoration-bf="tt_split_origin == 'original'"
+                              decoration-muted="state == 'cancel'">
+                            <field name="name" readonly="1"/>
+                            <field name="tt_split_origin" readonly="1"/>
+                            <field name="tt_split_parent_id" readonly="1"/>
+                            <field name="product_qty" sum="Total"/>
+                            <field name="qty_produced" sum="Total" readonly="1"/>
+                            <field name="product_uom_id" string="UoM" groups="uom.group_uom" readonly="1"/>
+                            <!-- Material in, then material out. The column is dropped
+                                 entirely outside a self-consuming chain. -->
+                            <field name="tt_consumed_lot_ids" widget="many2many_tags"
+                                   optional="show" readonly="1"
+                                   column_invisible="not parent.tt_is_self_consuming"/>
+                            <field name="lot_producing_id" optional="show"/>
+                            <field name="date_start" optional="show"/>
+                            <field name="user_id" widget="many2one_avatar_user" optional="hide"/>
+                            <field name="components_availability" optional="hide" readonly="1"/>
+                            <field name="state" widget="badge" readonly="1"
+                                   decoration-success="state in ('done', 'to_close')"
+                                   decoration-warning="state == 'progress'"
+                                   decoration-info="state == 'confirmed'"
+                                   decoration-danger="state == 'cancel'"
+                                   decoration-muted="state == 'draft'"/>
+                        </list>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+
+</odoo>

@@ -23,11 +23,29 @@ Consume a bill of materials component with a **fixed quantity**, whatever the qu
 
 ---
 
+### [`tt_mrp_backorder_traceability`](tt_mrp_backorder_traceability/) — Manufacturing Splits and Backorders Traceability
+
+Link, filter and group manufacturing orders with their splits and backorders.
+
+- Adds **Original MO**, **Derived From** and **Origin** (*Original*, *Split*, *Backorder*) on every manufacturing order
+- A **Splits & Backorders** tab shows the whole chain in place, with its quantity totals, a progress bar, the source document and the lots consumed
+- Search filters and grouping by **Original MO**, **Origin** and **Source Document** in the manufacturing orders list
+- Covers every split path: split wizard, backorder wizard on validation, mass production by lot or serial number, subcontracting and the Shop Floor
+- Rebuilds the chains of orders split before installation, without inventing a parentage the data cannot support
+- Purely additive: no native behaviour is changed
+- French translation
+- Compatible with Odoo 18 (CE & EE)
+
+**The problem it solves.** Splitting a manufacturing order, or closing one short, renames the orders `MO/0001-001`, `MO/0001-002`, … but stores no link between them. `procurement_group_id` cannot stand in, because make-to-order routes propagate a single group across unrelated orders — which is exactly what the native *Backorders* button relies on. `backorder_sequence` cannot either: it is a flat counter, computed per procurement group, that points at nothing. So there is no way to filter a family of splits in the list, nor to see from one order what became of the rest of the quantity.
+
+---
+
 ## Compatibility
 
 | Module | Odoo 18 |
 |--------|:-------:|
 | `tt_mrp_bom_fixed_quantity` | ✅ |
+| `tt_mrp_backorder_traceability` | ✅ |
 
 Backports for Odoo 17 and 19 are maintained in their respective branches once released.
 
