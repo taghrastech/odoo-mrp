@@ -32,7 +32,7 @@ manufacturing order - to declare a damaged component, for instance - and that
 entry survives every later recomputation.
 """,
     'author': "TaghrasTech",
-    'website': "https://github.com/taghrastech",
+    'website': 'https://github.com/taghrastech',
     'category': 'Manufacturing/Manufacturing',
     'version': '18.0.1.0.0',
     'license': 'LGPL-3',
